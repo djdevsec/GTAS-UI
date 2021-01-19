@@ -98,6 +98,10 @@ const Search = loadable(() =>
   import(/* webpackChunkName: "authed" */ "./pages/search/Search")
 );
 
+const MessageDiff = loadable(() =>
+  import(/* webpackChunkName: "authed" */ "./pages/messageDiff/MessageDiff")
+);
+
 //Admin bundle imports
 const Admin = loadable(() =>
   import(/* webpackChunkName: "admin" */ "./pages/admin/Admin")
@@ -253,6 +257,7 @@ const App = props => {
                         {UNAUTHED}
                         <Home path="/">
                           <Redirect from="/" to={FULLPATH_TO.FLIGHTS} noThrow />
+                          <MessageDiff path="diff"></MessageDiff>
                           <RoleAuthenticator
                             path="flights"
                             roles={[ROLE.ADMIN, ROLE.FLIGHTVWR]}

@@ -1,0 +1,18 @@
+.diff-removed {
+  color: red;
+  background-color: #ff003f1c;
+}
+
+.diff-added {
+  color: green;
+  background-color: #dfffdf;
+}
+
+.diff-same {
+  color: black;
+  background-color: white;
+}
+
+.diff-container {
+  margin: 20px;
+}
