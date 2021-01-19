@@ -136,8 +136,6 @@ const MessageDiff = props => {
     let res = diff["diffWords"](msg1, msg2);
 
     const updated = res.map(part => {
-      // green for additions, red for deletions
-      // grey for common parts
       const color = part.added
         ? "diff-added"
         : part.removed
