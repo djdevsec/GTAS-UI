@@ -2,7 +2,7 @@
 //
 // Please see license.txt for details.
 
-import {get, put, post, del, putNoId, downloadWrap} from "./genericService";
+import { get, put, post, del, putNoId, downloadWrap } from "./genericService";
 import BASE_URL, {
   BASEFILEHEADER,
   BASEHEADER,
@@ -23,7 +23,7 @@ const AUDITLOG = `${BASE_URL}gtas/api/auditlog`;
 const AUDITLOGACTIONS = `${BASE_URL}gtas/api/auditlog/actions`;
 const ERRORLOG = `${BASE_URL}gtas/api/errorlog`;
 const ERRORLOGCODES = `${BASE_URL}gtas/api/errorlog/codes`;
-const CASES = `${BASE_URL}gtas/hits`;
+const HITS = `${BASE_URL}gtas/hits`;
 const SETTINGSINFO = `${BASE_URL}gtas/settingsinfo`;
 const PAX = `${BASE_URL}gtas/passengers/passenger`;
 const FLIGHTPAXHITSUMMARY = `${BASE_URL}gtas/hit/flightpassenger`;
@@ -110,13 +110,13 @@ export const errorlog = {
     codes: params => get(ERRORLOGCODES, BASEHEADER, undefined, params)
   }
 };
-export const cases = {
+export const hits = {
   get: params => {
-    return get(CASES, BASEHEADER, undefined, params);
+    return get(HITS, BASEHEADER, undefined, params);
   },
-  updateStatus: (paxId, status) => {
+  post: (paxId, status) => {
     const body = { passengerId: paxId, status: status };
-    return post(CASES, BASEHEADER, stringify(body));
+    return post(HITS, BASEHEADER, stringify(body));
   }
 };
 export const settingsinfo = {
@@ -205,7 +205,7 @@ export const attachment = {
     },
     download: (attachmentId, fileName) => {
       const path = DOWNLOADATTACHMENT + `?attachmentId=${attachmentId}`;
-      get(path, BASEFILEHEADER, true).then(res =>{
+      get(path, BASEFILEHEADER, true).then(res => {
         downloadWrap(res, fileName);
       });
       //window.open(path, "_self");
@@ -323,7 +323,7 @@ export const manualHit = {
 export const logfile = {
   get: (id, params) => get(LOGFILE, BASEHEADER, id, params),
   download: (params, fileName) => {
-    get(LOGFILE+params, BASEHEADER).then(res=>{
+    get(LOGFILE + params, BASEHEADER).then(res => {
       downloadWrap(res, fileName);
     });
     //window.open(LOGFILE + params, "_self")

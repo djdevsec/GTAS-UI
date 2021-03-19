@@ -29,7 +29,7 @@ import {
   lpad5,
   addMinutes
 } from "../../utils/utils";
-import { cases, usersemails } from "../../services/serviceWrapper";
+import { hits, usersemails } from "../../services/serviceWrapper";
 import { LookupContext } from "../../context/data/LookupContext";
 import { ROLE, HIT_STATUS, LK } from "../../utils/constants";
 import { Col, Button, DropdownButton } from "react-bootstrap";
@@ -205,7 +205,7 @@ const Vetting = props => {
       }
     },
     {
-      Accessor: "paxName",
+      Accessor: "lastName",
       Xl8: true,
       Header: ["wl021", "Biographic Information"],
       Cell: ({ row }) => <BiographicInfo data={getBiographicData(row.original)} />
@@ -252,7 +252,7 @@ const Vetting = props => {
   const changeStatus = (paxId, status) => {
     const newStatus =
       status === HIT_STATUS.REVIEWED ? HIT_STATUS.REOPENED : HIT_STATUS.REVIEWED;
-    cases.updateStatus(paxId, newStatus.toUpperCase()).then(res => {
+    hits.post(paxId, newStatus.toUpperCase()).then(res => {
       setFilterFormKey(filterFormKey + 1);
     });
   };
@@ -263,7 +263,7 @@ const Vetting = props => {
   };
 
   const setDataWrapper = data => {
-    data = asArray(data.cases).map(item => {
+    data = asArray(data.hits).map(item => {
       item.id = item.id || `${item.flightId}${item.paxId}`;
       item.hitCounts = `${lpad5(item.highPrioHitCount)}:${lpad5(
         item.medPrioHitCount
@@ -383,7 +383,7 @@ const Vetting = props => {
       <SidenavContainer>
         <Col className="notopmargin">
           <FilterForm
-            service={cases.get}
+            service={hits.get}
             callback={setDataWrapper}
             paramCallback={parameterAdapter}
             key={filterFormKey}

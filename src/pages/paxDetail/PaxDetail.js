@@ -28,7 +28,7 @@ import UploadAttachment from "./uploadAttachment/UploadAttachment";
 import AttachmentModal from "./uploadAttachment/AttachmentModal";
 import Loading from "../../components/loading/Loading";
 
-import { paxdetails, cases } from "../../services/serviceWrapper";
+import { paxdetails, hits } from "../../services/serviceWrapper";
 import { asArray, hasData, titleCase } from "../../utils/utils";
 import { ACTION, ROLE } from "../../utils/constants";
 import { Link } from "@reach/router";
@@ -121,7 +121,7 @@ const PaxDetail = props => {
 
   const updateHitStatus = (status, confirmed) => {
     if (confirmed) {
-      cases.updateStatus(props.paxId, status).then(() => {
+      hits.post(props.paxId, status).then(() => {
         setHitSummaryRefreshKey(status);
       });
     }
