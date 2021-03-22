@@ -263,7 +263,7 @@ const Vetting = props => {
   };
 
   const setDataWrapper = data => {
-    data = asArray(data.hits).map(item => {
+    data = asArray(data.cases).map(item => {
       item.id = item.id || `${item.flightId}${item.paxId}`;
       item.hitCounts = `${lpad5(item.highPrioHitCount)}:${lpad5(
         item.medPrioHitCount
